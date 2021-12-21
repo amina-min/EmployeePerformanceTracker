@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Employee } from '../dashbord/employee.model';
 
 @Component({
@@ -10,7 +11,7 @@ import { Employee } from '../dashbord/employee.model';
 })
 export class EmployeelistComponent implements OnInit {
   employee: Employee = new Employee();
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private toastr:ToastrService) {
     this.loadEmployee();
   }
   Employees: any = [];
@@ -29,7 +30,7 @@ export class EmployeelistComponent implements OnInit {
   }
 
 
-  loadEmployee() {
+  loadEmployee() {    
     const headers = { 'content-Type': 'application/json' };
     this.http.post<any>('http://localhost:8080/employee/getAll', { headers: headers }).subscribe(employees => {
       console.log(employees);
@@ -42,8 +43,7 @@ return new Date(ts).toLocaleDateString('en-BD')
   }
 
   editEmployee(employee: any) {
-    this.router.navigate(['home'],{state:{emp:employee, isSave:false}})
-
+    this.router.navigate(['home'],{state:{emp:employee, isSave:false}})    
     this.employee.id = employee.id;
     this.employee.firstname = employee.firstname;
     this.employee.lastname = employee.lastname;
@@ -57,6 +57,7 @@ return new Date(ts).toLocaleDateString('en-BD')
   }
 
   deleteEmployee(employee: any) {
+    this.toastr.success("Employee delete success")
     const headers = { 'content-Type': 'application/json' };
     this.http.get("http://localhost:8080/employee/delete/" + employee.id, { headers: headers })
       .subscribe(data => {

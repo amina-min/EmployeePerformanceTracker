@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private service:StorageService, private router:Router) { }
 
   ngOnInit(): void {
+
   }
 
   logout(){

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Employee } from './employee.model';
 
 @Component({
@@ -14,7 +15,7 @@ export class DashbordComponent implements OnInit {
   employee: Employee = new Employee();
   formGroup: FormGroup;
   submitted = false;
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient , private toastr:ToastrService) {
     this.formGroup = this.fb.group(
       {
         firstname: ['', [Validators.required]],
@@ -57,6 +58,10 @@ export class DashbordComponent implements OnInit {
 
 
   saveEmployee() {
+    if(this.formGroup.invalid){
+      this.toastr.error("Save Failed")
+    }else{
+    this.toastr.success("Save Success")
     this.router.navigateByUrl("list")
     this.submitted = true;
     console.log(this.employee.firstname);
@@ -64,9 +69,9 @@ export class DashbordComponent implements OnInit {
     this.http.post<any>("http://localhost:8080/employee/saveEmployee", JSON.stringify(this.employee), { headers: headers })
       .subscribe(data => {
         console.log(data);
-
-      })
-
+      }
+      )
+    }
   }
 
 
@@ -77,7 +82,8 @@ export class DashbordComponent implements OnInit {
   }
 
   updateEmployee() {    
-    //ekhane update er kaj kiren
+    
+    this.toastr.success("Update success")
     this.isSave = true;
     const headers = {'content-Type': 'application/json' };
     this.http.post("http://localhost:8080/employee/update", JSON.stringify(this.employee), {headers: headers})

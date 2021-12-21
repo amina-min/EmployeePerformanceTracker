@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   submitted = false;
   constructor(private fb: FormBuilder, private loginService: LoginService, private storageService: StorageService, 
-    private route: Router) { 
+    private route: Router,private toastr:ToastrService) { 
     this.formGroup = this.fb.group(
       {
         username: ['', [Validators.required]],
@@ -33,7 +34,15 @@ export class LoginComponent implements OnInit {
     return this.formGroup.controls;
   }
 
+
   onSubmit(){
+
+    if(this.formGroup.invalid){
+      this.toastr.error("Login failed")
+
+
+    }else{
+      this.toastr.success("Login success")
     this.submitted = true;
    this.loginService.login(this.formGroup.value)
    .subscribe(res => {
@@ -44,8 +53,10 @@ export class LoginComponent implements OnInit {
      this.route.navigate(['/login']);
    })
   }
+  }
 
   signup(){
+    this.toastr.success("signup success")
     this.route.navigateByUrl("signup")
 
   }
