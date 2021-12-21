@@ -1,0 +1,39 @@
+<div style="height: 50px; text-align: center;" >
+  <h3><b>Employee List</b></h3>
+</div>
+<table class="table table-info table-striped"  >
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>FIRSTNAME</th>
+      <th>LASTNAME</th>
+      <th>EMAIL</th>
+      <th>GENDER</th>
+      <th>QUALIFICATION</th>
+      <th>DEPARTMENT</th>
+      <th>DATE OF BIRTH</th>
+      <th>NATIONALITY</th>
+      <th>EMPLOYMENT HISTORY</th>
+      <th>ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of Employees; index as i;">
+      <td>{{employee.id}}</td>
+      <td>{{employee.firstname}}</td>
+      <td>{{employee.lastname}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.gender}}</td>
+      <td>{{employee.qualification}}</td>
+      <td>{{employee.department}}</td>
+      <td>{{getFormattedDate(employee.date_of_birth)}}</td>
+      <td>{{employee.nationality}}</td>
+      <td>{{employee.employeementHistory}}</td>
+      <td>
+        <button href="home"  class="btn btn-primary" (click)="editEmployee(employee)">Edit</button>
+        <button  class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>

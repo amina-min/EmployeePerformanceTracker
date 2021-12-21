@@ -1,0 +1,127 @@
+<div class="container">
+
+    <div class="row content justify-content-center">
+
+        <div class="col-md-6 mt-2"
+            style="height:1050px; width:800px ;border: 1px solid; border-radius: 1%; border-color: rgb(161, 161, 161); border-radius:2%;  box-shadow:2px 3px 3px 2px;">
+            <h1 style="text-align: center;">Employee Add </h1>
+            <form [formGroup]="formGroup" (ngSubmit)="isSave? saveEmployee():updateEmployee()">
+
+                <div class=" form-group">
+                    <label for="firstname" class="form-label">Firstname :</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname"
+                        [(ngModel)]="employee.firstname" formControlName="firstname" placeholder="enter your firstname">
+                    <div *ngIf="submitted && f['firstname'].errors">
+                        <div class="error text-danger">
+                            Firstname is mandatory.
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    <label for="lastname" class="form-label">Lastname :</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname"
+                        [(ngModel)]="employee.lastname" formControlName="lastname" placeholder="enter your lastname">
+                    <div *ngIf="submitted && f['lastname'].errors">
+                        <div class="error text-danger">
+                            Lastname is mandatory.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email :</label>
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="employee.email"
+                        placeholder="enter your email" formControlName="email">
+                    <div *ngIf="submitted && f['email'].errors">
+                        <div class="error text-danger">
+                            Email is mandatory.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender"> Gender :</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="male" id="male" value="Male"
+                            [(ngModel)]="employee.gender" formControlName="male">
+                        <label class="form-check-label" for="male" > Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="female" id="female" value="Female"
+                            [(ngModel)]="employee.gender" formControlName="female">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div *ngIf="submitted && f['male'].errors || submitted && f['female'].errors" >
+                        <div class="error text-danger">
+                           Select gender
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class=" form-group">
+                    <label for="qualification" class="form-label">Qualification :</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification"
+                        [(ngModel)]="employee.qualification" formControlName="qualification" placeholder="enter your qualification">
+                        <div *ngIf="submitted && f['qualification'].errors">
+                            <div class="error text-danger">
+                                Qualification is mandatory.
+                            </div>
+                        </div>
+                </div>
+                <div class=" form-group">
+                    <label for="department" class="form-label">Department :</label>
+                    <input type="text" class="form-control" id="department" name="department"
+                        [(ngModel)]="employee.department" formControlName="department"  placeholder="enter your department">
+                        <div *ngIf="submitted && f['department'].errors">
+                            <div class="error text-danger">
+                                Department is mandatory.
+                            </div>
+                        </div>
+                </div>
+                <div class=" form-group">
+                    <label for="date_of_birth" class="form-label">Date Of Birth :</label>
+                    <input type="date" class="form-control" formControlName="date_of_birth" id="date_of_birth" name="date_of_birth"
+                        [(ngModel)]="employee.date_of_birth">
+                        <div *ngIf="submitted && f['date_of_birth'].errors">
+                            <div class="error text-danger">
+                                Date of Birth is mandatory.
+                            </div>
+                        </div>
+
+                </div>
+                <div class=" form-group">
+                    <label for="nationality" class="form-label">Nationality :</label>
+                    <input type="text" class="form-control" id="nationality" name="nationality"
+                        [(ngModel)]="employee.nationality" formControlName="nationality" placeholder="enter your nationality">
+                        <div *ngIf="submitted && f['nationality'].errors">
+                            <div class="error text-danger">
+                                Nationality is mandatory.
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeementHistory" class="form-label">Employeement History :</label>
+                    <textarea placeholder="write your employeementHistory..." class="form-control"
+                        id="employeementHistory" [(ngModel)]="employee.employeementHistory" formControlName="employeementHistory"
+                        name="employeementHistory"></textarea>
+                        <div *ngIf="submitted && f['employeementHistory'].errors">
+                            <div class="error text-danger">
+                                EmployeementHistory is mandatory.
+                            </div>
+                        </div>
+
+                </div>
+                <div>
+                    
+                    <button type="submit" class="btn btn-primary mt-2" >{{ isSave? 'Save' : 'Update'}}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div style="height: 100px;">
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<style>
+    .btn {
+        margin-left: auto;
+    }
+</style>
+
+
+<nav class="navbar navbar-light" 
+    style="background-color: rgb(0, 175, 175) ; height: 70px; width: 100%;">
+    
+        <ul class="nav-item">
+            <a class="nav-link active" aria-current="page" (click)="main()" href="main" style="color: white">Dashbord</a>
+        </ul>
+        <ul class="nav-item">
+            <a class="nav-link active" href="home" (click)="employeeInformation()" style="color: white">Employee Information</a>
+            
+        </ul>
+        <ul class="nav-item">
+            <a  (click)= "toggleProductList()" class="nav-link active" href="list" style="color: white">Employee List</a>
+        </ul>      
+    <div class="btn">
+        <ul class="nav-item ">
+            <button style="color: rgba(255, 255, 255);" class="btn btn-warning " (click)="logout()">Logout</button>
+        </ul>
+   </div>
+</nav>
+
+
+
+
